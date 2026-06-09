@@ -1,30 +1,13 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/docs",
-      "dest": "/docs.html"
-    },
-    {
-      "src": "/pricing",
-      "dest": "/pricing.html"
-    },
-    {
-      "src": "/status",
-      "dest": "/status.html"
-    },
-    {
-      "src": "/contact",
-      "dest": "/contact.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/api/ytsearch", "dest": "/api/ytsearch.js" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/docs", "dest": "/docs.html" },
+    { "src": "/pricing", "dest": "/pricing.html" },
+    { "src": "/status", "dest": "/status.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
     {
@@ -33,6 +16,13 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "no-store" }
       ]
     },
     {
