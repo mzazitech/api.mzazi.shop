@@ -2,6 +2,9 @@
   "name": "api-mzazi-shop",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "yt-search": "^2.13.1",
     "@distube/ytdl-core": "^4.16.7",
