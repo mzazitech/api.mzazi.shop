@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — NexusAPI</title>
+  <meta name="description" content="Simple, transparent pricing for every team. Free to start, scale as you grow." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300d4ff'/><text x='50%' y='58%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-family='monospace' font-weight='bold' fill='%23000'>N</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div><span class="loader-text">LOADING</span></div>
+<div id="toast-container"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-icon">N</div>
+    Nexus<span>API</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Docs</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="status.html">Status</a>
+    <a href="contact.html">Contact</a>
+    <a href="docs.html" class="nav-cta">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="docs.html">Documentation</a>
+  <a href="pricing.html" class="active">Pricing</a>
+  <a href="status.html">Status</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-wrap">
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <div class="section-label">Pricing</div>
+      <h1 class="section-title" style="font-size:42px;">Simple, transparent pricing</h1>
+      <p style="color:var(--text-secondary);font-size:17px;max-width:500px;margin:0 auto 16px;">Start free, scale when you need to. No hidden fees. Cancel anytime.</p>
+
+      <!-- Billing toggle -->
+      <div style="display:inline-flex;align-items:center;gap:12px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:6px 16px;margin-top:16px;">
+        <span style="font-size:14px;color:var(--text-secondary);">Monthly</span>
+        <div style="width:40px;height:22px;background:var(--neon-dim);border:1px solid rgba(0,212,255,0.4);border-radius:11px;position:relative;cursor:pointer;" id="billing-toggle">
+          <div id="billing-knob" style="position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--neon);border-radius:50%;transition:left 0.2s;"></div>
+        </div>
+        <span style="font-size:14px;color:var(--text-secondary);" id="annual-label">Annual <span style="color:var(--green);font-size:12px;font-weight:700;">Save 20%</span></span>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Free -->
+        <div class="pricing-card fade-up delay-1">
+          <div class="pricing-plan">Free</div>
+          <div class="pricing-price">$0 <span>/ month</span></div>
+          <p class="pricing-desc">Perfect for side projects and exploring the API.</p>
+          <ul class="pricing-features">
+            <li>100 requests / hour</li>
+            <li>All core endpoints</li>
+            <li>Community support</li>
+            <li>API key access</li>
+            <li class="no">AI endpoints</li>
+            <li class="no">Webhooks</li>
+            <li class="no">Analytics dashboard</li>
+            <li class="no">SLA guarantee</li>
+          </ul>
+          <a href="docs.html" class="btn btn-outline" style="width:100%;justify-content:center;">Start for Free</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card popular fade-up delay-2">
+          <div class="pricing-popular-badge">POPULAR</div>
+          <div class="pricing-plan" style="color:var(--neon);">Premium</div>
+          <div class="pricing-price" id="premium-price">$29 <span>/ month</span></div>
+          <p class="pricing-desc">For developers and small teams building real products.</p>
+          <ul class="pricing-features">
+            <li>10,000 requests / hour</li>
+            <li>All endpoints including AI</li>
+            <li>Email support (24h SLA)</li>
+            <li>API key rotation</li>
+            <li>Webhooks (up to 10)</li>
+            <li>Analytics dashboard</li>
+            <li>99.9% uptime SLA</li>
+            <li class="no">Dedicated infrastructure</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get Premium</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="pricing-card fade-up delay-3">
+          <div class="pricing-plan">Enterprise</div>
+          <div class="pricing-price">Custom <span></span></div>
+          <p class="pricing-desc">For teams with mission-critical, high-volume workloads.</p>
+          <ul class="pricing-features">
+            <li>Unlimited requests</li>
+            <li>All Premium features</li>
+            <li>Dedicated support (1h SLA)</li>
+            <li>Custom rate limits</li>
+            <li>Unlimited webhooks</li>
+            <li>Custom analytics & exports</li>
+            <li>99.99% uptime SLA</li>
+            <li>Dedicated infrastructure</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline" style="width:100%;justify-content:center;">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature comparison -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;margin-bottom:32px;">Full Feature Comparison</h2>
+      <div class="card" style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;min-width:600px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:12px 16px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--glass-border);">Feature</th>
+              <th style="text-align:center;padding:12px 16px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--glass-border);">Free</th>
+              <th style="text-align:center;padding:12px 16px;font-size:13px;color:var(--neon);border-bottom:1px solid var(--glass-border);">Premium</th>
+              <th style="text-align:center;padding:12px 16px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--glass-border);">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">Requests / hour</td>
+              <td style="text-align:center;padding:12px 16px;font-size:14px;font-family:var(--mono);">100</td>
+              <td style="text-align:center;padding:12px 16px;font-size:14px;font-family:var(--mono);color:var(--neon);">10,000</td>
+              <td style="text-align:center;padding:12px 16px;font-size:14px;font-family:var(--mono);">Unlimited</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">AI Endpoints</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-muted);">✕</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">✓</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">✓</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">Webhooks</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-muted);">✕</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">Up to 10</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">Unlimited</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">Analytics Dashboard</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-muted);">✕</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">✓</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--green);">Advanced</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">Uptime SLA</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--text-muted);">—</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--neon);">99.9%</td>
+              <td style="text-align:center;padding:12px 16px;color:var(--neon);">99.99%</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px;font-size:14px;color:var(--text-secondary);">Support</td>
+              <td style="text-align:center;padding:12px 16px;font-size:13px;color:var(--text-secondary);">Community</td>
+              <td style="text-align:center;padding:12px 16px;font-size:13px;color:var(--neon);">Email 24h SLA</td>
+              <td style="text-align:center;padding:12px 16px;font-size:13px;color:var(--text-secondary);">Dedicated 1h SLA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container" style="max-width:700px;">
+      <h2 class="section-title" style="text-align:center;margin-bottom:32px;">FAQ</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card">
+          <div style="font-weight:600;margin-bottom:8px;">Can I upgrade or downgrade anytime?</div>
+          <p style="font-size:14px;">Yes. Plan changes take effect immediately. If you downgrade, you keep access to your current plan until the end of the billing period.</p>
+        </div>
+        <div class="card">
+          <div style="font-weight:600;margin-bottom:8px;">What happens if I exceed my rate limit?</div>
+          <p style="font-size:14px;">Requests beyond your limit return a <code style="color:var(--neon);background:var(--glass-bg);padding:1px 5px;border-radius:4px;">429 Too Many Requests</code> response. We never charge overage fees — upgrade to increase your limit.</p>
+        </div>
+        <div class="card">
+          <div style="font-weight:600;margin-bottom:8px;">Is there a free trial for Premium?</div>
+          <p style="font-size:14px;">Yes — new accounts get a 14-day free trial of the Premium plan. No credit card required to start.</p>
+        </div>
+        <div class="card">
+          <div style="font-weight:600;margin-bottom:8px;">Do you offer discounts for startups or students?</div>
+          <p style="font-size:14px;">Yes. Contact us via the support page and we'll work something out. We offer 50% off for verified students and early-stage startups.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-content">
+    <a href="index.html" class="nav-brand"><div class="nav-brand-icon">N</div>Nexus<span>API</span></a>
+    <div class="footer-links"><a href="docs.html">Docs</a><a href="pricing.html">Pricing</a><a href="status.html">Status</a><a href="contact.html">Contact</a></div>
+    <span class="footer-copy">© 2025 NexusAPI. All rights reserved.</span>
+  </div></div></footer>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+const toggle = document.getElementById('billing-toggle');
+const knob = document.getElementById('billing-knob');
+const price = document.getElementById('premium-price');
+let annual = false;
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    annual = !annual;
+    knob.style.left = annual ? '23px' : '3px';
+    if (price) price.innerHTML = annual ? '$23 <span>/ month</span>' : '$29 <span>/ month</span>';
+  });
+}
+</script>
+</body>
+</html>
