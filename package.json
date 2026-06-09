@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "yt-search": "^2.13.1"
+    "yt-search": "^2.13.1",
+    "@distube/ytdl-core": "^4.16.7",
+    "qrcode": "^1.5.4"
   }
 }
