@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Status — NexusAPI</title>
+  <meta name="description" content="Real-time status and uptime history for NexusAPI services." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300d4ff'/><text x='50%' y='58%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-family='monospace' font-weight='bold' fill='%23000'>N</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div><span class="loader-text">LOADING</span></div>
+<div id="toast-container"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-icon">N</div>
+    Nexus<span>API</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Docs</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="status.html" class="active">Status</a>
+    <a href="contact.html">Contact</a>
+    <a href="docs.html" class="nav-cta">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="docs.html">Documentation</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="status.html" class="active">Status</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-wrap">
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+
+      <!-- Header -->
+      <div style="text-align:center;margin-bottom:48px;">
+        <div class="section-label">System Status</div>
+        <h1 class="section-title" style="font-size:40px;">
+          <span class="status-dot online"></span>
+          All Systems Operational
+        </h1>
+        <p style="color:var(--text-secondary);">Last updated: <span id="last-updated"></span></p>
+      </div>
+
+      <!-- Key metrics -->
+      <div class="grid-4" style="margin-bottom:40px;">
+        <div class="stat-card">
+          <div class="stat-num" data-target="99.9" data-suffix="%" data-decimals="1">99.9%</div>
+          <div class="stat-label">30-day Uptime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num live-latency" data-base="42">42ms</div>
+          <div class="stat-label">API Latency</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="2400000" data-suffix="+">2.4M+</div>
+          <div class="stat-label">Requests Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-target="50324">50K</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="card" style="margin-bottom:28px;">
+        <div style="font-weight:700;font-size:16px;margin-bottom:20px;">Service Status</div>
+
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">API Gateway</span>
+          <span class="service-latency live-latency" data-base="38">38ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">AI Inference Engine</span>
+          <span class="service-latency live-latency" data-base="280">280ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">CDN / Edge Nodes</span>
+          <span class="service-latency live-latency" data-base="12">12ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">Authentication Service</span>
+          <span class="service-latency live-latency" data-base="55">55ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">Database Cluster</span>
+          <span class="service-latency live-latency" data-base="6">6ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">Webhook Delivery</span>
+          <span class="service-latency live-latency" data-base="95">95ms</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+        <div class="service-row">
+          <span class="status-dot online"></span>
+          <span class="service-name">Analytics Pipeline</span>
+          <span class="service-latency">—</span>
+          <span class="badge badge-online">Operational</span>
+        </div>
+      </div>
+
+      <!-- Uptime history -->
+      <div class="card" style="margin-bottom:28px;">
+        <div style="font-weight:700;font-size:16px;margin-bottom:24px;">Uptime History — Last 90 Days</div>
+
+        <div style="margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:14px;">API Gateway</span>
+            <span style="font-size:13px;color:var(--green);font-weight:600;">99.9%</span>
+          </div>
+          <div class="uptime-grid" id="uptime-api"></div>
+        </div>
+        <div style="margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:14px;">CDN / Edge</span>
+            <span style="font-size:13px;color:var(--green);font-weight:600;">100%</span>
+          </div>
+          <div class="uptime-grid" id="uptime-cdn"></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:14px;">Auth Service</span>
+            <span style="font-size:13px;color:var(--green);font-weight:600;">99.8%</span>
+          </div>
+          <div class="uptime-grid" id="uptime-auth"></div>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--glass-border);">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--green);"></span> Operational
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--orange);"></span> Degraded
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);">
+            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--red);"></span> Outage
+          </div>
+        </div>
+      </div>
+
+      <!-- Response time breakdown -->
+      <div class="card" style="margin-bottom:28px;">
+        <div style="font-weight:700;font-size:16px;margin-bottom:20px;">Average Response Times</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:13px;color:var(--text-secondary);">GET /api/ping</span>
+              <span style="font-size:13px;font-family:var(--mono);color:var(--neon);">38ms</span>
+            </div>
+            <div class="status-bar"><div class="status-bar-fill" data-width="8" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:13px;color:var(--text-secondary);">GET /api/users</span>
+              <span style="font-size:13px;font-family:var(--mono);color:var(--neon);">62ms</span>
+            </div>
+            <div class="status-bar"><div class="status-bar-fill" data-width="18" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:13px;color:var(--text-secondary);">POST /api/ai/generate</span>
+              <span style="font-size:13px;font-family:var(--mono);color:var(--orange);">320ms</span>
+            </div>
+            <div class="status-bar"><div class="status-bar-fill" data-width="62" style="background:linear-gradient(90deg,var(--orange),var(--neon));width:0%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:13px;color:var(--text-secondary);">POST /api/ai/image</span>
+              <span style="font-size:13px;font-family:var(--mono);color:var(--orange);">2100ms</span>
+            </div>
+            <div class="status-bar"><div class="status-bar-fill" data-width="82" style="background:linear-gradient(90deg,var(--orange),var(--neon));width:0%"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:13px;color:var(--text-secondary);">POST /api/data/query</span>
+              <span style="font-size:13px;font-family:var(--mono);color:var(--neon);">95ms</span>
+            </div>
+            <div class="status-bar"><div class="status-bar-fill" data-width="28" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Incident history -->
+      <div class="card">
+        <div style="font-weight:700;font-size:16px;margin-bottom:20px;">Recent Incidents</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-weight:600;font-size:14px;">No incidents this month</span>
+              <span class="badge badge-online">Resolved</span>
+            </div>
+            <p style="font-size:13px;">All systems have been fully operational for the past 30 days.</p>
+          </div>
+          <div style="padding:14px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--radius-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-weight:600;font-size:14px;">AI Inference Latency Spike</span>
+              <span style="font-size:12px;color:var(--text-muted);">Dec 18, 2024</span>
+            </div>
+            <p style="font-size:13px;">Elevated latency on POST /ai/generate for ~22 minutes due to model cache miss. Resolved at 14:32 UTC.</p>
+          </div>
+          <div style="padding:14px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--radius-sm);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-weight:600;font-size:14px;">CDN Edge Node Degradation</span>
+              <span style="font-size:12px;color:var(--text-muted);">Nov 5, 2024</span>
+            </div>
+            <p style="font-size:13px;">ap-southeast-1 edge node served degraded performance for 8 minutes. No data loss. Failover triggered automatically.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-content">
+    <a href="index.html" class="nav-brand"><div class="nav-brand-icon">N</div>Nexus<span>API</span></a>
+    <div class="footer-links"><a href="docs.html">Docs</a><a href="pricing.html">Pricing</a><a href="status.html">Status</a><a href="contact.html">Contact</a></div>
+    <span class="footer-copy">© 2025 NexusAPI. All rights reserved.</span>
+  </div></div></footer>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+const el = document.getElementById('last-updated');
+if (el) {
+  const now = new Date();
+  el.textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) + ' — ' + now.toLocaleDateString([], {month:'long',day:'numeric',year:'numeric'});
+}
+</script>
+</body>
+</html>
