@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation — NexusAPI</title>
+  <meta name="description" content="Complete API reference for NexusAPI. Explore all endpoints, parameters, and code examples." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300d4ff'/><text x='50%' y='58%' text-anchor='middle' dominant-baseline='middle' font-size='18' font-family='monospace' font-weight='bold' fill='%23000'>N</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-ring"></div><span class="loader-text">LOADING</span></div>
+<div id="toast-container"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-icon">N</div>
+    Nexus<span>API</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="docs.html" class="active">Docs</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="status.html">Status</a>
+    <a href="contact.html">Contact</a>
+    <a href="docs.html" class="nav-cta">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="docs.html" class="active">Documentation</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="status.html">Status</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-wrap">
+<div class="docs-layout">
+
+  <!-- ── Sidebar ──────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Overview</div>
+      <a href="#introduction"  class="sidebar-link active">Introduction</a>
+      <a href="#authentication" class="sidebar-link">Authentication</a>
+      <a href="#errors"         class="sidebar-link">Errors</a>
+      <a href="#rate-limits"    class="sidebar-link">Rate Limits</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Core</div>
+      <a href="#ping"    class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /ping</a>
+      <a href="#status"  class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /status</a>
+      <a href="#version" class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /version</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">AI</div>
+      <a href="#ai-generate" class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /ai/generate</a>
+      <a href="#ai-chat"     class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /ai/chat</a>
+      <a href="#ai-image"    class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /ai/image</a>
+      <a href="#ai-analyze"  class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /ai/analyze</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Users</div>
+      <a href="#users-list"   class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /users</a>
+      <a href="#users-create" class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /users</a>
+      <a href="#users-get"    class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /users/:id</a>
+      <a href="#users-update" class="sidebar-link"><span class="method-dot method-dot-put"></span>PUT /users/:id</a>
+      <a href="#users-delete" class="sidebar-link"><span class="method-dot method-dot-delete"></span>DELETE /users/:id</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Data</div>
+      <a href="#data-query"  class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /data/query</a>
+      <a href="#data-upload" class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /data/upload</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Webhooks</div>
+      <a href="#webhooks-list"   class="sidebar-link"><span class="method-dot method-dot-get"></span>GET /webhooks</a>
+      <a href="#webhooks-create" class="sidebar-link"><span class="method-dot method-dot-post"></span>POST /webhooks</a>
+      <a href="#webhooks-delete" class="sidebar-link"><span class="method-dot method-dot-delete"></span>DELETE /webhooks/:id</a>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ──────────────────── -->
+  <main class="docs-main">
+
+    <!-- Search -->
+    <div class="search-bar">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="endpoint-search" type="text" placeholder="Search endpoints…" autocomplete="off" />
+    </div>
+
+    <!-- Introduction -->
+    <section id="introduction" style="margin-bottom:48px;">
+      <div class="section-label">Overview</div>
+      <h1 style="font-size:32px;margin-bottom:12px;">API Reference</h1>
+      <p style="color:var(--text-secondary);margin-bottom:20px;max-width:620px;">
+        The NexusAPI REST API lets you integrate AI generation, user management, data processing, and webhooks into any application. All requests use HTTPS and return JSON.
+      </p>
+      <div class="card" style="background:rgba(0,212,255,0.04);border-color:rgba(0,212,255,0.2);">
+        <div style="font-family:var(--mono);font-size:14px;color:var(--text-secondary);">
+          Base URL: <span style="color:var(--neon);">https://api.nexusapi.dev/v2</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Authentication -->
+    <section id="authentication" style="margin-bottom:48px;">
+      <h2 style="font-size:22px;margin-bottom:12px;">Authentication</h2>
+      <p style="color:var(--text-secondary);margin-bottom:16px;">Pass your API key in the <code style="color:var(--neon);background:var(--glass-bg);padding:2px 6px;border-radius:4px;">Authorization</code> header with every request.</p>
+      <div class="code-wrap">
+        <div class="code-header">
+          <span>Header</span>
+          <button class="btn btn-ghost btn-sm" data-copy="Authorization: Bearer YOUR_API_KEY" data-copy-label="Header">Copy</button>
+        </div>
+        <div class="code-body">
+          <pre>Authorization: Bearer <span style="color:var(--neon);">YOUR_API_KEY</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Errors -->
+    <section id="errors" style="margin-bottom:48px;">
+      <h2 style="font-size:22px;margin-bottom:12px;">Error Codes</h2>
+      <table class="param-table" style="width:100%;">
+        <thead>
+          <tr><th>Code</th><th>Meaning</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>200</td><td style="color:var(--green)">OK</td><td>Request succeeded</td></tr>
+          <tr><td>400</td><td style="color:var(--orange)">Bad Request</td><td>Invalid parameters</td></tr>
+          <tr><td>401</td><td style="color:var(--red)">Unauthorized</td><td>Missing or invalid API key</td></tr>
+          <tr><td>404</td><td style="color:var(--orange)">Not Found</td><td>Resource not found</td></tr>
+          <tr><td>429</td><td style="color:var(--orange)">Too Many Requests</td><td>Rate limit exceeded</td></tr>
+          <tr><td>500</td><td style="color:var(--red)">Server Error</td><td>Internal server error</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Rate Limits -->
+    <section id="rate-limits" style="margin-bottom:48px;">
+      <h2 style="font-size:22px;margin-bottom:12px;">Rate Limits</h2>
+      <table class="param-table">
+        <thead><tr><th>Plan</th><th>Limit</th><th>Window</th></tr></thead>
+        <tbody>
+          <tr><td>Free</td><td>100 req</td><td>per hour</td></tr>
+          <tr><td>Premium</td><td>10,000 req</td><td>per hour</td></tr>
+          <tr><td>Enterprise</td><td>Unlimited</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ── ENDPOINTS ──────────────────────── -->
+    <div id="no-results" class="hidden" style="padding:40px;text-align:center;color:var(--text-muted);">No endpoints match your search.</div>
+
+    <!-- Core -->
+    <h2 style="font-size:18px;color:var(--text-secondary);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);">Core</h2>
+
+    <!-- GET /ping -->
+    <div id="ping" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-get">GET</span>
+        <span class="endpoint-path">/api/ping</span>
+        <span class="endpoint-desc">Returns server status</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="GET https://api.nexusapi.dev/v2/ping" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <p style="color:var(--text-secondary);margin-bottom:16px;">Health check endpoint. Returns current server status and version info.</p>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request</div>
+            <div class="code-wrap">
+              <div class="code-header"><span>cURL</span>
+                <button class="btn btn-ghost btn-sm" data-copy="curl -X GET https://api.nexusapi.dev/v2/ping \
+  -H 'Authorization: Bearer YOUR_API_KEY'" data-copy-label="Request">Copy</button>
+              </div>
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> -X GET https://api.nexusapi.dev/v2/ping \
+  -H <span style="color:#f0c040">'Authorization: Bearer YOUR_API_KEY'</span></pre></div>
+            </div>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response <span style="color:var(--green);font-size:11px;">200 OK</span></div>
+            <div class="code-wrap">
+              <div class="code-header"><span>JSON</span>
+                <button class="btn btn-ghost btn-sm" data-copy='{"status":"online","version":"2.4.0","latency":42,"region":"us-east-1"}' data-copy-label="Response">Copy</button>
+              </div>
+              <div class="code-body"><pre>{
+  <span style="color:#79c0ff">"status"</span>: <span style="color:#a8ff78">"online"</span>,
+  <span style="color:#79c0ff">"version"</span>: <span style="color:#a8ff78">"2.4.0"</span>,
+  <span style="color:#79c0ff">"latency"</span>: <span style="color:#f0c040">42</span>,
+  <span style="color:#79c0ff">"region"</span>: <span style="color:#a8ff78">"us-east-1"</span>
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GET /status -->
+    <div id="status" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-get">GET</span>
+        <span class="endpoint-path">/api/status</span>
+        <span class="endpoint-desc">Detailed service status</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="GET https://api.nexusapi.dev/v2/status" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> https://api.nexusapi.dev/v2/status \
+  -H <span style="color:#f0c040">'Authorization: Bearer YOUR_API_KEY'</span></pre></div>
+            </div>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response <span style="color:var(--green);font-size:11px;">200 OK</span></div>
+            <div class="code-wrap">
+              <div class="code-header"><span>JSON</span>
+                <button class="btn btn-ghost btn-sm" data-copy='{"status":"operational","services":{"api":"up","ai":"up","cdn":"up","auth":"up"},"uptime":99.9}' data-copy-label="Response">Copy</button>
+              </div>
+              <div class="code-body"><pre>{
+  <span style="color:#79c0ff">"status"</span>: <span style="color:#a8ff78">"operational"</span>,
+  <span style="color:#79c0ff">"services"</span>: {
+    <span style="color:#79c0ff">"api"</span>: <span style="color:#a8ff78">"up"</span>,
+    <span style="color:#79c0ff">"ai"</span>: <span style="color:#a8ff78">"up"</span>,
+    <span style="color:#79c0ff">"cdn"</span>: <span style="color:#a8ff78">"up"</span>,
+    <span style="color:#79c0ff">"auth"</span>: <span style="color:#a8ff78">"up"</span>
+  },
+  <span style="color:#79c0ff">"uptime"</span>: <span style="color:#f0c040">99.9</span>
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI -->
+    <h2 style="font-size:18px;color:var(--text-secondary);margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);">AI Endpoints</h2>
+
+    <!-- POST /ai/generate -->
+    <div id="ai-generate" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-post">POST</span>
+        <span class="endpoint-path">/api/ai/generate</span>
+        <span class="endpoint-desc">Generate AI text response</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="POST https://api.nexusapi.dev/v2/ai/generate" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <p style="color:var(--text-secondary);margin-bottom:16px;">Generates an AI-powered text response from a prompt using our hosted LLM.</p>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Request Body</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>prompt</td><td>string</td><td><span class="param-required">required</span></td><td>The input text to generate from</td></tr>
+                <tr><td>model</td><td>string</td><td><span class="param-optional">optional</span></td><td>Model ID. Default: <code>nexus-1</code></td></tr>
+                <tr><td>max_tokens</td><td>integer</td><td><span class="param-optional">optional</span></td><td>Max tokens to generate. Default: 512</td></tr>
+                <tr><td>temperature</td><td>float</td><td><span class="param-optional">optional</span></td><td>Creativity 0–1. Default: 0.7</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request</div>
+            <div class="code-wrap">
+              <div class="code-header"><span>cURL</span>
+                <button class="btn btn-ghost btn-sm" data-copy='curl -X POST https://api.nexusapi.dev/v2/ai/generate \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{\"prompt\": \"hello\", \"max_tokens\": 100}"' data-copy-label="Request">Copy</button>
+              </div>
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> -X POST https://api.nexusapi.dev/v2/ai/generate \
+  -H <span style="color:#f0c040">"Authorization: Bearer YOUR_API_KEY"</span> \
+  -H <span style="color:#f0c040">"Content-Type: application/json"</span> \
+  -d <span style="color:#f0c040">'{"prompt": "hello", "max_tokens": 100}'</span></pre></div>
+            </div>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response <span style="color:var(--green);font-size:11px;">200 OK</span></div>
+            <div class="code-wrap">
+              <div class="code-header"><span>JSON</span>
+                <button class="btn btn-ghost btn-sm" data-copy='{"response":"Hello! How can I help you today?","model":"nexus-1","tokens_used":18,"latency_ms":320}' data-copy-label="Response">Copy</button>
+              </div>
+              <div class="code-body"><pre>{
+  <span style="color:#79c0ff">"response"</span>: <span style="color:#a8ff78">"Hello! How can I help you today?"</span>,
+  <span style="color:#79c0ff">"model"</span>: <span style="color:#a8ff78">"nexus-1"</span>,
+  <span style="color:#79c0ff">"tokens_used"</span>: <span style="color:#f0c040">18</span>,
+  <span style="color:#79c0ff">"latency_ms"</span>: <span style="color:#f0c040">320</span>
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST /ai/chat -->
+    <div id="ai-chat" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-post">POST</span>
+        <span class="endpoint-path">/api/ai/chat</span>
+        <span class="endpoint-desc">Multi-turn conversation</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="POST https://api.nexusapi.dev/v2/ai/chat" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <p style="color:var(--text-secondary);margin-bottom:16px;">Send a conversation history and receive a contextual reply.</p>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Request Body</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>messages</td><td>array</td><td><span class="param-required">required</span></td><td>Array of {role, content} objects</td></tr>
+                <tr><td>system</td><td>string</td><td><span class="param-optional">optional</span></td><td>System prompt to set context</td></tr>
+                <tr><td>stream</td><td>boolean</td><td><span class="param-optional">optional</span></td><td>Stream response via SSE. Default: false</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> -X POST https://api.nexusapi.dev/v2/ai/chat \
+  -H <span style="color:#f0c040">"Authorization: Bearer YOUR_API_KEY"</span> \
+  -H <span style="color:#f0c040">"Content-Type: application/json"</span> \
+  -d <span style="color:#f0c040">'{
+    "messages": [
+      {"role": "user", "content": "What is the capital of France?"}
+    ],
+    "system": "You are a helpful geography assistant."
+  }'</span></pre></div>
+            </div>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre>{
+  <span style="color:#79c0ff">"message"</span>: {
+    <span style="color:#79c0ff">"role"</span>: <span style="color:#a8ff78">"assistant"</span>,
+    <span style="color:#79c0ff">"content"</span>: <span style="color:#a8ff78">"The capital of France is Paris."</span>
+  },
+  <span style="color:#79c0ff">"tokens_used"</span>: <span style="color:#f0c040">24</span>
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST /ai/image -->
+    <div id="ai-image" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-post">POST</span>
+        <span class="endpoint-path">/api/ai/image</span>
+        <span class="endpoint-desc">Generate an AI image</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="POST https://api.nexusapi.dev/v2/ai/image" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Request Body</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>prompt</td><td>string</td><td><span class="param-required">required</span></td><td>Image description</td></tr>
+                <tr><td>size</td><td>string</td><td><span class="param-optional">optional</span></td><td>1024x1024, 512x512, 256x256</td></tr>
+                <tr><td>style</td><td>string</td><td><span class="param-optional">optional</span></td><td>vivid or natural</td></tr>
+                <tr><td>n</td><td>integer</td><td><span class="param-optional">optional</span></td><td>Number of images (1–4). Default: 1</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request / Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> -X POST https://api.nexusapi.dev/v2/ai/image \
+  -d <span style="color:#f0c040">'{"prompt": "a futuristic city at night", "size": "1024x1024"}'</span>
+
+<span style="color:#6e7681">// Response:</span>
+{
+  <span style="color:#79c0ff">"images"</span>: [{ <span style="color:#79c0ff">"url"</span>: <span style="color:#a8ff78">"https://cdn.nexusapi.dev/img/abc123.png"</span> }],
+  <span style="color:#79c0ff">"created"</span>: <span style="color:#f0c040">1735689600</span>
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Users -->
+    <h2 style="font-size:18px;color:var(--text-secondary);margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);">Users</h2>
+
+    <!-- GET /users -->
+    <div id="users-list" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-get">GET</span>
+        <span class="endpoint-path">/api/users</span>
+        <span class="endpoint-desc">List all users</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="GET https://api.nexusapi.dev/v2/users" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Query Parameters</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>page</td><td>integer</td><td><span class="param-optional">optional</span></td><td>Page number. Default: 1</td></tr>
+                <tr><td>limit</td><td>integer</td><td><span class="param-optional">optional</span></td><td>Results per page. Default: 20, Max: 100</td></tr>
+                <tr><td>search</td><td>string</td><td><span class="param-optional">optional</span></td><td>Filter by name or email</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre>{
+  <span style="color:#79c0ff">"data"</span>: [
+    { <span style="color:#79c0ff">"id"</span>: <span style="color:#a8ff78">"usr_abc123"</span>, <span style="color:#79c0ff">"name"</span>: <span style="color:#a8ff78">"Jane Doe"</span>, <span style="color:#79c0ff">"email"</span>: <span style="color:#a8ff78">"jane@example.com"</span>, <span style="color:#79c0ff">"created_at"</span>: <span style="color:#a8ff78">"2025-01-01T00:00:00Z"</span> }
+  ],
+  <span style="color:#79c0ff">"pagination"</span>: { <span style="color:#79c0ff">"page"</span>: <span style="color:#f0c040">1</span>, <span style="color:#79c0ff">"limit"</span>: <span style="color:#f0c040">20</span>, <span style="color:#79c0ff">"total"</span>: <span style="color:#f0c040">142</span> }
+}</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST /users -->
+    <div id="users-create" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-post">POST</span>
+        <span class="endpoint-path">/api/users</span>
+        <span class="endpoint-desc">Create a new user</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="POST https://api.nexusapi.dev/v2/users" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Request Body</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>name</td><td>string</td><td><span class="param-required">required</span></td><td>Full name</td></tr>
+                <tr><td>email</td><td>string</td><td><span class="param-required">required</span></td><td>Email address</td></tr>
+                <tr><td>role</td><td>string</td><td><span class="param-optional">optional</span></td><td>user or admin. Default: user</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request / Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre><span style="color:#79c0ff">curl</span> -X POST https://api.nexusapi.dev/v2/users \
+  -d <span style="color:#f0c040">'{"name": "Jane Doe", "email": "jane@example.com"}'</span>
+
+<span style="color:#6e7681">// Response 201 Created:</span>
+{ <span style="color:#79c0ff">"id"</span>: <span style="color:#a8ff78">"usr_abc123"</span>, <span style="color:#79c0ff">"name"</span>: <span style="color:#a8ff78">"Jane Doe"</span>, <span style="color:#79c0ff">"email"</span>: <span style="color:#a8ff78">"jane@example.com"</span>, <span style="color:#79c0ff">"role"</span>: <span style="color:#a8ff78">"user"</span> }</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE /users/:id -->
+    <div id="users-delete" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-del">DELETE</span>
+        <span class="endpoint-path">/api/users/:id</span>
+        <span class="endpoint-desc">Delete a user by ID</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="DELETE https://api.nexusapi.dev/v2/users/:id" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Path Parameters</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>id</td><td>string</td><td><span class="param-required">required</span></td><td>User ID (usr_…)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre>{ <span style="color:#79c0ff">"deleted"</span>: <span style="color:#f0c040">true</span>, <span style="color:#79c0ff">"id"</span>: <span style="color:#a8ff78">"usr_abc123"</span> }</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Webhooks -->
+    <h2 style="font-size:18px;color:var(--text-secondary);margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);">Webhooks</h2>
+
+    <div id="webhooks-create" class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="badge badge-post">POST</span>
+        <span class="endpoint-path">/api/webhooks</span>
+        <span class="endpoint-desc">Register a webhook endpoint</span>
+        <div class="endpoint-actions">
+          <button class="btn btn-ghost btn-sm" data-copy="POST https://api.nexusapi.dev/v2/webhooks" data-copy-label="Endpoint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy URL
+          </button>
+        </div>
+        <svg class="chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.2s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="endpoint-body">
+        <div class="endpoint-body-content">
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Request Body</div>
+            <table class="param-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>url</td><td>string</td><td><span class="param-required">required</span></td><td>HTTPS URL to receive events</td></tr>
+                <tr><td>events</td><td>array</td><td><span class="param-required">required</span></td><td>Events to subscribe to</td></tr>
+                <tr><td>secret</td><td>string</td><td><span class="param-optional">optional</span></td><td>HMAC signing secret</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-section">
+            <div class="endpoint-section-title">Example Request / Response</div>
+            <div class="code-wrap">
+              <div class="code-body"><pre><span style="color:#6e7681">// Request body:</span>
+{
+  <span style="color:#79c0ff">"url"</span>: <span style="color:#a8ff78">"https://yourapp.com/hooks/nexus"</span>,
+  <span style="color:#79c0ff">"events"</span>: [<span style="color:#a8ff78">"user.created"</span>, <span style="color:#a8ff78">"user.deleted"</span>]
+}
+
+<span style="color:#6e7681">// Response 201:</span>
+{ <span style="color:#79c0ff">"id"</span>: <span style="color:#a8ff78">"wh_xyz789"</span>, <span style="color:#79c0ff">"url"</span>: <span style="color:#a8ff78">"https://yourapp.com/hooks/nexus"</span>, <span style="color:#79c0ff">"status"</span>: <span style="color:#a8ff78">"active"</span> }</pre></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
